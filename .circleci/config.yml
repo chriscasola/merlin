@@ -5,6 +5,9 @@
 version: 2
 jobs:
   build:
+    environment:
+      - CC_TEST_REPORTER_ID: c2cbb97fd3d5cbc34c4d340012ac2960f16be4974e736b4faf788d8bc8d3911b
+
     docker:
       # specify the version you desire here
       - image: circleci/node:8
@@ -13,6 +16,22 @@ jobs:
 
     steps:
       - checkout
-      - run: npm install
-      - run: npx lerna bootstrap
-      - run: npm run build
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Install Node Dependencies
+          command: |
+            npm install
+            npx lerna bootstrap
+      -run:
+          name: Run Build
+          command: |
+            ./cc-test-reporter before-build
+            npm run build
+            mkdir -p ./tmp/
+            ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.cli.json packages/cli/coverage/lcov.info
+            ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
+            ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
