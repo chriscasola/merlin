@@ -33,5 +33,5 @@ jobs:
             npm run build
             mkdir -p ./tmp/
             ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.cli.json packages/cli/coverage/lcov.info
-            ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 2 -o tmp/codeclimate.total.json
+            ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 1 -o tmp/codeclimate.total.json
             ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
