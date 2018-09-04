@@ -22,7 +22,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist/ && tsc && jest"
+    "build": "rimraf dist/ && tsc && jest --ci",
+    "dev": "jest --watchAll"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
