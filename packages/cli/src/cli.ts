@@ -2,7 +2,6 @@
 
 import * as program from 'commander';
 
-program
-  .parse(process.argv);
+program.parse(process.argv);
 
 console.log('Welcome to Merlin!');

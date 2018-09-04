@@ -1,6 +1,10 @@
+jest.mock('../util/exec');
+
 import { clone } from './';
+import { exec } from '../util/exec';
 
 test('clones a repo', async () => {
-  const result = await clone('something');
-  expect(result).toBe('something');
+  await clone('something', 'cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(exec).toHaveBeenCalledWith('git clone something', 'cwd');
 });

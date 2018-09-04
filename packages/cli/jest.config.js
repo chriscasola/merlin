@@ -11,6 +11,7 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['ts', 'tsx', 'js'],
+  modulePathIgnorePatterns: ['/dist/.*'],
   testEnvironment: 'node',
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$',
   transform: {
