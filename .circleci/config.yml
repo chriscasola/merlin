@@ -26,7 +26,7 @@ jobs:
           command: |
             npm install
             npx lerna bootstrap
-      -run:
+      - run:
           name: Run Build
           command: |
             ./cc-test-reporter before-build
