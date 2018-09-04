@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
   "workspaces": [
     "packages/*"
   ],

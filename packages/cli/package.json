@@ -1,6 +1,10 @@
 {
   "name": "@merlin/cli",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
   "description": "A command-line wizard for developer productivity",
   "bin": {
     "merl": "./dist/cli.js"
