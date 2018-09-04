@@ -9,7 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "prettier --single-quote --trailing-comma \"all\" --write \"./packages/*/src/**/*.{js,ts,md}\" && lerna run build"
+    "build": "prettier --list-different \"./packages/*/src/**/*.{js,ts}\" && lerna run build",
+    "lint": "prettier --write \"./packages/*/src/**/*.{js,ts}\""
   },
   "devDependencies": {
     "lerna": "^3.2.1",
