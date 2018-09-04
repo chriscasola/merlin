@@ -14,6 +14,9 @@
     "email": "chriscasola@gmail.com"
   },
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist/ && tsc"
   },
