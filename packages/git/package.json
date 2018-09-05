@@ -20,7 +20,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "prettier --list-different \"./src/**/*.{js,ts}\" && rimraf dist/ && tsc && jest --ci --passWithNoTests",
+    "build": "prettier --list-different \"./src/**/*.{js,ts}\" && rimraf dist/ && tsc && jest --ci",
     "lint": "prettier --write \"./src/**/*.{js,ts}\"",
     "dev": "jest --watchAll"
   },
