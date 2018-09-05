@@ -1,4 +1,4 @@
-import { exec } from '../util/exec';
+import { exec } from '@merl/util';
 
 const SHORTNAME_REGEX = /^\w+\/\w+$/i;
 

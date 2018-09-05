@@ -9,11 +9,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "prettier --list-different \"./packages/*/src/**/*.{js,ts}\" && lerna run build",
-    "lint": "prettier --write \"./packages/*/src/**/*.{js,ts}\""
+    "build": "lerna run build",
+    "lint": "lerna run lint"
   },
   "devDependencies": {
-    "lerna": "^3.2.1",
-    "prettier": "1.14.2"
+    "lerna": "^3.2.1"
   }
 }

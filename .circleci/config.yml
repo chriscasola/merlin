@@ -24,8 +24,7 @@ jobs:
       - run:
           name: Install Node Dependencies
           command: |
-            npm install
-            npx lerna bootstrap
+            npx lerna bootstrap --hoist
       - run:
           name: Run Build
           command: |
@@ -33,5 +32,7 @@ jobs:
             npm run build
             mkdir -p ./tmp/
             ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.cli.json packages/cli/coverage/lcov.info
+            ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.git.json packages/git/coverage/lcov.info
+            ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.util.json packages/util/coverage/lcov.info
             ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 1 -o tmp/codeclimate.total.json
             ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json

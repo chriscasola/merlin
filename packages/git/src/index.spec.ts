@@ -1,9 +1,11 @@
-jest.mock('../util/exec');
+jest.mock('@merl/util');
 
 import { clone } from './';
-import { exec } from '../util/exec';
+import { exec } from '@merl/util';
 
 test('clones a repo', async () => {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
   await clone('git@github.com:chriscasola/merlin.git', 'cwd');
   expect(exec).toHaveBeenCalledTimes(1);
   expect(exec).toHaveBeenCalledWith(
@@ -20,6 +22,8 @@ test('clones a repo', async () => {
 });
 
 test('clones a repo using the short name', async function() {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
   await clone('chriscasola/merlin', 'cwd');
   expect(exec).toHaveBeenCalledTimes(1);
   expect(exec).toHaveBeenCalledWith(
@@ -29,6 +33,8 @@ test('clones a repo using the short name', async function() {
 });
 
 test('clones a repo into an alternate directory', async function() {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
   await clone('chriscasola/merlin', 'cwd', { destination: 'merlin2' });
   expect(exec).toHaveBeenCalledTimes(1);
   expect(exec).toHaveBeenCalledWith(
@@ -38,6 +44,8 @@ test('clones a repo into an alternate directory', async function() {
 });
 
 test('clones a repo using a short name and alternate host', async function() {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
   await clone('chriscasola/merlin', 'cwd', {
     destination: 'merlin2',
     host: 'github.mycompany.com',
