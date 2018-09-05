@@ -1,3 +1,3 @@
-# @merlin/cli
+# @merl/cli
 
-The CLI for merlin.
+The CLI for [merlin](https://github.com/chriscasola/merlin).
