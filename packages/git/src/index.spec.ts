@@ -1,7 +1,7 @@
 jest.mock('@merl/util');
 
-import { clone } from './';
 import { exec } from '@merl/util';
+import { clone } from './';
 
 test('clones a repo', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
@@ -21,7 +21,7 @@ test('clones a repo', async () => {
   );
 });
 
-test('clones a repo using the short name', async function() {
+test('clones a repo using the short name', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
 
   await clone('chriscasola/merlin', 'cwd');
@@ -32,7 +32,7 @@ test('clones a repo using the short name', async function() {
   );
 });
 
-test('clones a repo into an alternate directory', async function() {
+test('clones a repo into an alternate directory', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
 
   await clone('chriscasola/merlin', 'cwd', { destination: 'merlin2' });
@@ -43,7 +43,7 @@ test('clones a repo into an alternate directory', async function() {
   );
 });
 
-test('clones a repo using a short name and alternate host', async function() {
+test('clones a repo using a short name and alternate host', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
 
   await clone('chriscasola/merlin', 'cwd', {
