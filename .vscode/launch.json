@@ -17,6 +17,17 @@
       "windows": {
         "program": "${workspaceFolder}/packages/cli/node_modules/jest/bin/jest",
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Util Tests",
+      "cwd": "${workspaceFolder}/packages/util/",
+      "program": "${workspaceFolder}/packages/util/node_modules/.bin/jest",
+      "args": ["--runInBand", "--coverage", "false"],
+      "windows": {
+        "program": "${workspaceFolder}/packages/util/node_modules/jest/bin/jest",
+      }
     }
   ]
 }
