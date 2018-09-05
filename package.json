@@ -3,7 +3,7 @@
   "private": true,
   "engines": {
     "node": ">=8",
-    "npm": ">=5"
+    "npm": ">=6"
   },
   "workspaces": [
     "packages/*"
@@ -13,6 +13,18 @@
     "lint": "lerna run lint"
   },
   "devDependencies": {
-    "lerna": "^3.2.1"
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.9.4",
+    "jest": "^23.5.0",
+    "lerna": "^3.2.1",
+    "prettier": "1.14.2",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.1.4",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "@merl/cli": "file:packages/cli",
+    "@merl/git": "file:packages/git",
+    "@merl/util": "file:packages/util"
   }
 }

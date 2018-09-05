@@ -25,16 +25,7 @@
     "dev": "jest --watchAll"
   },
   "dependencies": {
-    "@merl/util": "^0.0.0",
+    "@merl/util": "file:../util",
     "tslib": "^1.9.3"
-  },
-  "devDependencies": {
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.9.4",
-    "jest": "^23.5.0",
-    "prettier": "1.14.2",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.1.4",
-    "typescript": "^3.0.3"
   }
 }
