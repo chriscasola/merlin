@@ -29,3 +29,25 @@ export async function clone(
 
   return undefined;
 }
+
+/**
+ * Check out the given branch
+ */
+export async function checkout(branchName: string, cwd: string) {
+  await exec(`git checkout ${branchName}`, cwd);
+}
+
+/**
+ * Check out a new branch with the given name
+ */
+export async function checkoutNewBranch(branchName: string, cwd: string) {
+  await exec(`git checkout -b ${branchName}`, cwd);
+}
+
+/**
+ * Check if the given git working directory is clean
+ */
+export async function isCleanWorkingDirectory(cwd: string) {
+  const result = await exec(`git status --porcelain`, cwd);
+  return !!result.match(/^\s*$/);
+}

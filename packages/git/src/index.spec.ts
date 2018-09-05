@@ -1,7 +1,12 @@
 jest.mock('@merl/util');
 
 import { exec } from '@merl/util';
-import { clone } from './';
+import {
+  checkout,
+  checkoutNewBranch,
+  clone,
+  isCleanWorkingDirectory,
+} from './';
 
 test('clones a repo', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
@@ -55,4 +60,35 @@ test('clones a repo using a short name and alternate host', async () => {
     'git clone "git@github.mycompany.com:chriscasola/merlin.git" "merlin2"',
     'cwd',
   );
+});
+
+test('check out a branch', async () => {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
+  await checkout('feat/my-branch', 'cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(exec).toHaveBeenCalledWith('git checkout feat/my-branch', 'cwd');
+});
+
+test('check out a new branch', async () => {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve());
+
+  await checkoutNewBranch('feat/my-branch', 'cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(exec).toHaveBeenCalledWith('git checkout -b feat/my-branch', 'cwd');
+});
+
+test('check for clean working directory', async () => {
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve('M bla'));
+
+  const isClean = await isCleanWorkingDirectory('cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(exec).toHaveBeenCalledWith('git status --porcelain', 'cwd');
+  expect(isClean).toBe(false);
+
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve(''));
+  expect(await isCleanWorkingDirectory('cwd')).toBe(true);
+
+  (exec as jest.Mock).mockImplementation(() => Promise.resolve(' \n '));
+  expect(await isCleanWorkingDirectory('cwd')).toBe(true);
 });
