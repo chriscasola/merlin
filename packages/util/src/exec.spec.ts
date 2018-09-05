@@ -21,3 +21,15 @@ test('executes the command in a child process', async function() {
   const result = await resultPromise;
   expect(result).toBe('git results');
 });
+
+test('handles a non-zero exit code from the child process', function(done) {
+  let handler: any;
+  (child_process.exec as any).mockImplementation(
+    (command: string, options: child_process.ExecOptions, callback: any) => {
+      handler = callback;
+    },
+  );
+
+  exec('git clone blarg', 'cwd').catch(() => done());
+  handler('git error');
+});
