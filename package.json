@@ -16,8 +16,10 @@
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/node": "^10.9.4",
+    "@types/rimraf": "^2.0.2",
     "jest": "^23.5.0",
     "lerna": "^3.2.1",
+    "memfs": "^2.9.4",
     "prettier": "1.14.2",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.1.4",
@@ -30,6 +32,7 @@
   "dependencies": {
     "@merl/cli": "file:packages/cli",
     "@merl/git": "file:packages/git",
-    "@merl/util": "file:packages/util"
+    "@merl/util": "file:packages/util",
+    "@merl/web": "file:packages/web"
   }
 }
