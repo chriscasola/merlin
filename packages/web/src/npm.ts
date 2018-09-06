@@ -17,24 +17,13 @@ const access = promisify(fs.access);
 export async function npmInstall(cwd: string) {
   await rimraf(join(cwd, '/**/node_modules/'));
 
-  let useLerna = false;
-  let useYarn = false;
+  const useLerna = await checkForFile('lerna.json', cwd);
+  const useYarn = await checkForFile('yarn.lock', cwd);
+  const hasPackageJson = await checkForFile('package.json', cwd);
 
-  try {
-    await access(join(cwd, '/yarn.lock'), fs.constants.F_OK);
-    useYarn = true;
-  } catch (e) {
-    // nothing to do
+  if (!hasPackageJson) {
+    throw new Error('No package.json found');
   }
-
-  try {
-    await access(join(cwd, '/lerna.json'), fs.constants.F_OK);
-    useLerna = true;
-  } catch (e) {
-    // nothing to do
-  }
-
-  await access(join(cwd, '/package.json'), fs.constants.F_OK);
 
   if (useYarn) {
     await exec('yarn', cwd);
@@ -49,4 +38,10 @@ export async function npmInstall(cwd: string) {
       await exec('npx lerna bootstrap', cwd);
     }
   }
+}
+
+function checkForFile(file: string, cwd: string): Promise<boolean> {
+  return access(join(cwd, file))
+    .then(() => true)
+    .catch(() => false);
 }

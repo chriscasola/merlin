@@ -59,7 +59,9 @@ Object {
   "/proj/test/readme.md": "readme",
 }
 `);
-    await expect(npmInstall('/proj/test/')).rejects.toBeTruthy();
+    await expect(
+      npmInstall('/proj/test/'),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`"No package.json found"`);
   });
 
   test('use yarn if there is a yarn.lock present', async () => {
