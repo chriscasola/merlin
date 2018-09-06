@@ -25,18 +25,26 @@ export async function npmInstall(cwd: string) {
     throw new Error('No package.json found');
   }
 
+  await runNpmInstall(useYarn, cwd);
+
+  if (useLerna) {
+    await runLernaBootstrap(useYarn, cwd);
+  }
+}
+
+async function runNpmInstall(useYarn: boolean, cwd: string) {
   if (useYarn) {
     await exec('yarn', cwd);
   } else {
     await exec('npm install', cwd);
   }
+}
 
-  if (useLerna) {
-    if (useYarn) {
-      await exec('yarn lerna bootstrap', cwd);
-    } else {
-      await exec('npx lerna bootstrap', cwd);
-    }
+async function runLernaBootstrap(useYarn: boolean, cwd: string) {
+  if (useYarn) {
+    await exec('yarn lerna bootstrap', cwd);
+  } else {
+    await exec('npx lerna bootstrap', cwd);
   }
 }
 
