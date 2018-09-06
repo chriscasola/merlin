@@ -1,0 +1,32 @@
+{
+  "name": "@merl/web",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "description": "An API for automating developer workflows in web projects",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "repository": "https://github.com/chriscasola/merlin.git",
+  "author": {
+    "name": "Chris Casola",
+    "email": "chriscasola@gmail.com"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" && rimraf dist/ && tsc && jest --ci",
+    "lint": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
+    "dev": "jest --watchAll"
+  },
+  "dependencies": {
+    "@merl/util": "file:../util",
+    "rimraf": "^2.6.2",
+    "tslib": "^1.9.3"
+  }
+}
