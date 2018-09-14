@@ -6,6 +6,7 @@ import {
   checkoutNewBranch,
   clone,
   isCleanWorkingDirectory,
+  updateRemoteBranch,
 } from './';
 
 test('clones a repo', async () => {
@@ -91,4 +92,17 @@ test('check for clean working directory', async () => {
 
   (exec as jest.Mock).mockImplementation(() => Promise.resolve(' \n '));
   expect(await isCleanWorkingDirectory('cwd')).toBe(true);
+});
+
+test('update a remote branch', async () => {
+  await updateRemoteBranch('feat/my-branch', 'upstream', 'cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(exec).toHaveBeenCalledWith('git push upstream feat/my-branch ', 'cwd');
+
+  await updateRemoteBranch('feat/my-branch', 'upstream', 'cwd', true);
+  expect(exec).toHaveBeenCalledTimes(2);
+  expect(exec).toHaveBeenCalledWith(
+    'git push upstream feat/my-branch -f',
+    'cwd',
+  );
 });

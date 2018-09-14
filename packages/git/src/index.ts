@@ -51,3 +51,18 @@ export async function isCleanWorkingDirectory(cwd: string) {
   const result = await exec(`git status --porcelain`, cwd);
   return !!result.match(/^\s*$/);
 }
+
+/**
+ * Update a remote branch with the latest commits in the local branch
+ */
+export async function updateRemoteBranch(
+  branchName: string,
+  remote: string,
+  cwd: string,
+  force: boolean = false,
+) {
+  return await exec(
+    `git push ${remote} ${branchName} ${force ? '-f' : ''}`,
+    cwd,
+  );
+}
