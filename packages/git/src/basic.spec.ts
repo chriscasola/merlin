@@ -7,7 +7,7 @@ import {
   clone,
   isCleanWorkingDirectory,
   updateRemoteBranch,
-} from './';
+} from './basic';
 
 test('clones a repo', async () => {
   (exec as jest.Mock).mockImplementation(() => Promise.resolve());
