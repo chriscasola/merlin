@@ -6,7 +6,8 @@
       "type": "node",
       "request": "launch",
       "name": "Debug CLI",
-      "program": "${workspaceFolder}/packages/cli/dist/cli.js"
+      "program": "${workspaceFolder}/packages/cli/dist/cli.js",
+      "args": ["dev", "myBranch"]
     },
     {
       "type": "node",
