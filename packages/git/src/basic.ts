@@ -66,3 +66,22 @@ export async function updateRemoteBranch(
     cwd,
   );
 }
+
+export async function getRecentBranches(
+  cwd: string,
+  numberOfBranches: number = 5,
+) {
+  const result = await exec(
+    'git for-each-ref --sort=committerdate refs/heads/',
+    cwd,
+  );
+  return result
+    .split('\n')
+    .filter(line => line.length > 0)
+    .map(branchRow => {
+      return branchRow.match(
+        /^\s*[0-9a-f]+\s+[a-z]+\s+refs\/heads\/(.*)\s*$/i,
+      )![1];
+    })
+    .slice(0, numberOfBranches);
+}

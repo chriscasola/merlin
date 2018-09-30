@@ -24,6 +24,8 @@
     "dev": "jest --watchAll"
   },
   "dependencies": {
+    "@merl/git": "file:../git",
+    "@merl/web": "file:../web",
     "commander": "^2.17.1",
     "tslib": "^1.9.3"
   }

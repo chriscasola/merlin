@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as program from 'commander';
+import listBranches from './list-branches';
 
 program
   .command('dev [branch]')
@@ -13,7 +14,12 @@ program
     );
   });
 
-program.parse(process.argv);
+program
+  .command('list-branches')
+  .description('Lists the git branches most recently committed to.')
+  .option('-n', '--num-branches', 5)
+  .action(({ numBranches }) => {
+    listBranches(numBranches);
+  });
 
-// tslint:disable-next-line:no-console
-console.log('Welcome to Merlin!');
+program.parse(process.argv);

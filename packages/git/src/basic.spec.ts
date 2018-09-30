@@ -5,6 +5,7 @@ import {
   checkout,
   checkoutNewBranch,
   clone,
+  getRecentBranches,
   isCleanWorkingDirectory,
   updateRemoteBranch,
 } from './basic';
@@ -105,4 +106,19 @@ test('update a remote branch', async () => {
     'git push upstream feat/my-branch -f',
     'cwd',
   );
+});
+
+test('get recent branches', async () => {
+  (exec as jest.Mock).mockImplementation(() =>
+    Promise.resolve(
+      'abcd commit refs/heads/branch1\r\n1234 commit refs/heads/branch2\r\n',
+    ),
+  );
+
+  let result = await getRecentBranches('cwd');
+  expect(exec).toHaveBeenCalledTimes(1);
+  expect(result).toEqual(['branch1', 'branch2']);
+
+  result = await getRecentBranches('cwd', 1);
+  expect(result).toEqual(['branch1']);
 });
