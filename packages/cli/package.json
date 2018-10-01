@@ -9,6 +9,9 @@
   "files": [
     "dist/"
   ],
+  "bin": {
+    "merl": "dist/cli.js"
+  },
   "repository": "https://github.com/chriscasola/merlin.git",
   "author": {
     "name": "Chris Casola",
