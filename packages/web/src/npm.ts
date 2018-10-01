@@ -14,8 +14,10 @@ const access = promisify(fs.access);
  * of a lock file. A `lerna bootstrap` will also be
  * run if a `lerna.json` is detected.
  */
-export async function npmInstall(cwd: string) {
-  await rimraf(join(cwd, '/**/node_modules/'));
+export async function npmInstall(cwd: string, clean: boolean = false) {
+  if (clean) {
+    await rimraf(join(cwd, '/**/node_modules/'));
+  }
 
   const useLerna = await checkForFile('lerna.json', cwd);
   const useYarn = await checkForFile('yarn.lock', cwd);

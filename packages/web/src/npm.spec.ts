@@ -14,7 +14,7 @@ describe('npmInstall', () => {
     memfs.vol.fromJSON({
       '/proj/test/package.json': '{"name":"some-package"}',
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(memfs.vol.toJSON()).toMatchInlineSnapshot(`
 Object {
   "/proj/test/package.json": "{\\"name\\":\\"some-package\\"}",
@@ -23,6 +23,18 @@ Object {
 
     memfs.vol.fromJSON({
       '/proj/test/node_modules/some_package/readme.md': 'readme',
+    });
+    await npmInstall('/proj/test/', true);
+    expect(memfs.vol.toJSON()).toMatchInlineSnapshot(`
+Object {
+  "/proj/test/package.json": "{\\"name\\":\\"some-package\\"}",
+}
+`);
+  });
+
+  test('skip clean if requested', async () => {
+    memfs.vol.fromJSON({
+      '/proj/test/package.json': '{"name":"some-package"}',
     });
     await npmInstall('/proj/test/');
     expect(memfs.vol.toJSON()).toMatchInlineSnapshot(`
@@ -40,7 +52,7 @@ Object {
         'readme',
       '/proj/test/packages/sub-package/readme.md': 'readme',
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(memfs.vol.toJSON()).toMatchInlineSnapshot(`
 Object {
   "/proj/test/package.json": "{\\"name\\":\\"some-package\\"}",
@@ -60,7 +72,7 @@ Object {
 }
 `);
     await expect(
-      npmInstall('/proj/test/'),
+      npmInstall('/proj/test/', true),
     ).rejects.toThrowErrorMatchingInlineSnapshot(`"No package.json found"`);
   });
 
@@ -69,7 +81,7 @@ Object {
       '/proj/test/package.json': `{"name":"some-package"}`,
       '/proj/test/yarn.lock': 'lockfile',
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(1);
     expect(exec).toHaveBeenCalledWith('yarn', '/proj/test/');
   });
@@ -78,7 +90,7 @@ Object {
     memfs.vol.fromJSON({
       '/proj/test/package.json': `{"name":"some-package"}`,
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(1);
     expect(exec).toHaveBeenCalledWith('npm install', '/proj/test/');
   });
@@ -88,7 +100,7 @@ Object {
       '/proj/test/lerna.json': `{"lerna":"config"}`,
       '/proj/test/package.json': `{"name":"some-package"}`,
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(2);
     expect(exec).toHaveBeenNthCalledWith(1, 'npm install', '/proj/test/');
     expect(exec).toHaveBeenNthCalledWith(
@@ -103,7 +115,7 @@ Object {
       '/proj/test/package.json': `{"name":"some-package"}`,
       '/proj/test/yarn.lock': 'lockfile',
     });
-    await npmInstall('/proj/test/');
+    await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(4);
     expect(exec).toHaveBeenNthCalledWith(3, 'yarn', '/proj/test/');
     expect(exec).toHaveBeenNthCalledWith(
