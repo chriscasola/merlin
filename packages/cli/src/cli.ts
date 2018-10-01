@@ -2,6 +2,7 @@
 
 import * as program from 'commander';
 import dev from './dev';
+import installDeps from './install-deps';
 import listBranches from './list-branches';
 
 program
@@ -18,6 +19,18 @@ program
   .option('-n', '--num-branches', 5)
   .action(({ numBranches }) => {
     listBranches(numBranches);
+  });
+
+program
+  .command('install-deps')
+  .description('Optionally clean and then install dependencies.')
+  .option(
+    '-c',
+    '--clean',
+    'Clean previously installed dependencies before installing.',
+  )
+  .action(({ clean }) => {
+    installDeps(!!clean);
   });
 
 program.parse(process.argv);
