@@ -83,7 +83,10 @@ Object {
     });
     await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(1);
-    expect(exec).toHaveBeenCalledWith('yarn', '/proj/test/');
+    expect(exec).toHaveBeenCalledWith(
+      'yarn --ignore-engines --network-timeout 30000000',
+      '/proj/test/',
+    );
   });
 
   test('use npm if there is a package.json present', async () => {
@@ -117,7 +120,11 @@ Object {
     });
     await npmInstall('/proj/test/', true);
     expect(exec).toHaveBeenCalledTimes(4);
-    expect(exec).toHaveBeenNthCalledWith(3, 'yarn', '/proj/test/');
+    expect(exec).toHaveBeenNthCalledWith(
+      3,
+      'yarn --ignore-engines --network-timeout 30000000',
+      '/proj/test/',
+    );
     expect(exec).toHaveBeenNthCalledWith(
       4,
       'yarn lerna bootstrap',

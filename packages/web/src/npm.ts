@@ -36,7 +36,7 @@ export async function npmInstall(cwd: string, clean: boolean = false) {
 
 async function runNpmInstall(useYarn: boolean, cwd: string) {
   if (useYarn) {
-    await exec('yarn', cwd);
+    await exec('yarn --ignore-engines --network-timeout 30000000', cwd);
   } else {
     await exec('npm install', cwd);
   }
