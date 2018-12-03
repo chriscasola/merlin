@@ -5,6 +5,7 @@ module.exports = {
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
+  testEnvironment: 'node',
   globals: {
     'ts-jest': {
       tsConfigFile: 'tsconfig.json',
