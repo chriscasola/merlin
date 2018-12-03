@@ -36,6 +36,8 @@ Run `npm run merl -- <arguments to merlin here>` to hit your local build.
 
 You can run the tests in watch mode by running `npx lerna run --stream dev --scope @merl/<package-name>`
 
+You can update the snapshots for snapshot testing by running `npm run update-snapshots`
+
 ## Contribution Guidlines
 
 * Add tests for all changes.

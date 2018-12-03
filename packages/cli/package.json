@@ -25,7 +25,8 @@
   "scripts": {
     "build": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" && rimraf dist/ && tsc && jest --ci",
     "lint": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
-    "dev": "jest --watchAll"
+    "dev": "jest --watchAll",
+    "update-snapshots": "jest -u"
   },
   "dependencies": {
     "@merl/git": "file:../git",

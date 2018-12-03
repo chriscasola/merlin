@@ -12,6 +12,7 @@
     "build": "lerna run build --stream",
     "lint": "lerna run lint --stream",
     "docs": "typedoc --tsconfig tsconfig.base.json packages/",
+    "update-snapshots": "lerna run update-snapshots --stream",
     "merl": "node ./packages/cli/src/index.js"
   },
   "devDependencies": {
