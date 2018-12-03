@@ -12,11 +12,11 @@
 
 ### Run the Full Build
 
-`npm run build`
+`npm run lint && npm run build`
 
 ### Auto-Fix Lint Errors
 
-`npm run lint`
+`npm run lint-fix`
 
 ## Repository Organization
 

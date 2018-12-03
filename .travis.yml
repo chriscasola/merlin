@@ -33,11 +33,6 @@ before_install:
 
 install: npm ci
 
-before_script:
-  - npm config set loglevel warn
-  - git config --global user.email test@example.com
-  - git config --global user.name "Tester McPerson"
-  - if [[ "$TRAVIS_OS_NAME" = "windows" ]]; then npm i -g yarn; fi
-
 script:
+  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run lint; fi
   - npm run build

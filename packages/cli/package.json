@@ -23,8 +23,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" && rimraf dist/ && tsc && jest --ci",
-    "lint": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
+    "build": "rimraf dist/ && tsc && jest --ci",
+    "lint": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\"",
+    "lint-fix": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
     "dev": "jest --watchAll",
     "update-snapshots": "jest -u"
   },
