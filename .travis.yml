@@ -12,11 +12,6 @@ os:
   - linux
   - windows
 
-env:
-  global:
-    - NO_UPDATE_NOTIFIER=1
-    - NODE_NO_WARNINGS=1
-
 matrix:
   fast_finish: true
   exclude:
@@ -36,3 +31,22 @@ install: npm ci
 script:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run lint; fi
   - npm run build
+
+jobs:
+  include:
+    - stage: Report Coverage
+      script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - npm run build
+        - mkdir -p ./tmp/
+        - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.git.json packages/git/coverage/lcov.info
+        - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.util.json packages/util/coverage/lcov.info
+        - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.web.json packages/web/coverage/lcov.info
+        - ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 3 -o tmp/codeclimate.total.json
+        - ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
+        - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json; fi
+
+      node_js: 11
+      os: linux
