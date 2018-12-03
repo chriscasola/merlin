@@ -25,10 +25,6 @@ jobs:
           keys:
             - npm-cache-v1{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
-          name: CI Hacks
-          command: |
-            node ./.circleci/hack.js
-      - run:
           name: Install Node Dependencies
           command: |
             sudo npm install -g npm@latest

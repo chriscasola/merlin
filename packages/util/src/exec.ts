@@ -15,7 +15,7 @@ export function exec(command: string, cwd: string): Promise<string> {
         return;
       }
 
-      resolve(stdout);
+      resolve(stdout.trim());
     });
   });
 }
