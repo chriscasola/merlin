@@ -18,7 +18,7 @@ test('executes the command in a child process', async () => {
 
   const resultPromise = exec('git clone blarg', 'cwd');
   if (process.platform === 'win32') {
-    handler(undefined, '"git results"');
+    handler(undefined, ' "git results"\n');
   } else {
     handler(undefined, 'git results');
   }
