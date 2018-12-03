@@ -7,10 +7,11 @@
   },
   "description": "A command-line wizard for developer productivity",
   "files": [
-    "dist/"
+    "dist/",
+    "src/index.js"
   ],
   "bin": {
-    "merl": "dist/cli.js"
+    "merl": "src/index.js"
   },
   "repository": "https://github.com/chriscasola/merlin.git",
   "author": {
@@ -24,7 +25,8 @@
   "scripts": {
     "build": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" && rimraf dist/ && tsc && jest --ci",
     "lint": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
-    "dev": "jest --watchAll"
+    "dev": "jest --watchAll",
+    "update-snapshots": "jest -u"
   },
   "dependencies": {
     "@merl/git": "file:../git",

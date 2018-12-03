@@ -9,9 +9,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build",
-    "lint": "lerna run lint",
-    "docs": "typedoc --tsconfig tsconfig.base.json packages/"
+    "build": "lerna run build --stream",
+    "lint": "lerna run lint --stream",
+    "docs": "typedoc --tsconfig tsconfig.base.json packages/",
+    "update-snapshots": "lerna run update-snapshots --stream",
+    "merl": "node ./packages/cli/src/index.js"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",

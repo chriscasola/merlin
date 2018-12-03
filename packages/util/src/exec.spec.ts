@@ -17,7 +17,11 @@ test('executes the command in a child process', async () => {
   );
 
   const resultPromise = exec('git clone blarg', 'cwd');
-  handler(undefined, 'git results');
+  if (process.platform === 'win32') {
+    handler(undefined, ' "git results"\n');
+  } else {
+    handler(undefined, 'git results');
+  }
   const result = await resultPromise;
   expect(result).toBe('git results');
 });
@@ -31,5 +35,9 @@ test('handles a non-zero exit code from the child process', done => {
   );
 
   exec('git clone blarg', 'cwd').catch(() => done());
-  handler('git error');
+  if (process.platform === 'win32') {
+    handler('"git error"');
+  } else {
+    handler('git error');
+  }
 });
