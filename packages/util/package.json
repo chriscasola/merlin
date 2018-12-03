@@ -22,7 +22,7 @@
   "scripts": {
     "build": "prettier --list-different \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" && rimraf dist/ && tsc && jest --ci",
     "lint": "prettier --write \"./src/**/*.{js,ts}\" && tslint -p \"./tsconfig.json\" --fix",
-    "dev": "jest --watchAll"
+    "dev": "jest --watchAll -u"
   },
   "dependencies": {
     "tslib": "^1.9.3"

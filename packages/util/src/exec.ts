@@ -15,7 +15,12 @@ export function exec(command: string, cwd: string): Promise<string> {
         return;
       }
 
-      resolve(stdout.trim());
+      /* istanbul ignore next */
+      if (process.platform === 'win32') {
+        stdout = stdout.slice(1, -1);
+      }
+
+      resolve(stdout);
     });
   });
 }

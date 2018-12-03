@@ -34,7 +34,7 @@ Re-run the build script.
 
 Run `npm run merl -- <arguments to merlin here>` to hit your local build.
 
-You can run the tests in watch mode by running `npm run dev` inside one of the package directories.
+You can run the tests in watch mode by running `npx lerna run --stream dev --scope @merl/<package-name>`
 
 ## Contribution Guidlines
 
