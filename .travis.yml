@@ -37,8 +37,8 @@ install: npm ci
 
 script:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run lint; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run docs; fi
   - npm run build
+  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run docs; fi
 
 jobs:
   include:
