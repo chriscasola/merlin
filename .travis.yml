@@ -67,4 +67,3 @@ jobs:
         branch: master
         node_js: 11
         os: linux
-        condition:
