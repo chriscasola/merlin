@@ -1,7 +1,7 @@
 jest.mock('child_process');
 
 import * as child_process from 'child_process';
-import { exec } from './exec';
+import { exec, spawn } from './exec';
 
 test('executes the command in a child process', async () => {
   let handler: any;
@@ -40,4 +40,17 @@ test('handles a non-zero exit code from the child process', done => {
   } else {
     handler('git error');
   }
+});
+
+test('spawn will return immediately with output streams', async () => {
+  (child_process.spawn as any).mockImplementation(() => undefined);
+  spawn('git status', 'cwd');
+  expect(child_process.spawn).toHaveBeenCalledWith('git status', [], {
+    cwd: 'cwd',
+    env: {
+      FORCE_COLOR: 'true',
+    },
+    shell: true,
+    windowsHide: true,
+  });
 });
