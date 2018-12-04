@@ -38,6 +38,8 @@ You can run the tests in watch mode by running `npx lerna run --stream dev --sco
 
 You can update the snapshots for snapshot testing by running `npm run update-snapshots`
 
+You can debug the tests or CLI in VSCode using the included debug configurations.
+
 ## Contribution Guidlines
 
 * Add tests for all changes.
