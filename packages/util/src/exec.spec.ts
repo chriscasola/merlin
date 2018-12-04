@@ -48,6 +48,7 @@ test('spawn will return immediately with output streams', async () => {
   expect(child_process.spawn).toHaveBeenCalledWith('git status', [], {
     cwd: 'cwd',
     env: {
+      ...process.env,
       FORCE_COLOR: 'true',
     },
     shell: true,

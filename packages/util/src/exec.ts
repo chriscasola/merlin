@@ -36,6 +36,7 @@ export function spawn(command: string, cwd: string): ChildProcess {
   return child_process.spawn(command, [], {
     cwd,
     env: {
+      ...process.env,
       FORCE_COLOR: 'true',
     },
     shell: true,
