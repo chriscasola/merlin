@@ -41,6 +41,17 @@
       "windows": {
         "program": "${workspaceFolder}/node_modules/jest/bin/jest",
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Web Tests",
+      "cwd": "${workspaceFolder}/packages/web/",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": ["--runInBand", "--coverage", "false"],
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      }
     }
   ]
 }

@@ -3,7 +3,7 @@ jest.mock('@merl/util');
 
 import { exec } from '@merl/util';
 import * as memfs from 'memfs';
-import { npmInstall } from './npm';
+import { npmInstall, projectUsesYarn } from './npm';
 
 afterEach(() => {
   memfs.vol.reset();
@@ -130,5 +130,18 @@ Object {
       'yarn lerna bootstrap',
       '/proj/test/',
     );
+  });
+
+  test('choose between yarn and npm', async () => {
+    memfs.vol.fromJSON({
+      '/proj/test/yarn.lock': 'lockfile',
+    });
+    await expect(projectUsesYarn('/proj/test/')).resolves.toEqual(true);
+
+    memfs.vol.reset();
+    memfs.vol.fromJSON({
+      '/proj/test/readme.md': 'readme',
+    });
+    await expect(projectUsesYarn('/proj/test/')).resolves.toEqual(false);
   });
 });

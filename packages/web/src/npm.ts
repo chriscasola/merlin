@@ -20,7 +20,7 @@ export async function npmInstall(cwd: string, clean: boolean = false) {
   }
 
   const useLerna = await checkForFile('lerna.json', cwd);
-  const useYarn = await checkForFile('yarn.lock', cwd);
+  const useYarn = await projectUsesYarn(cwd);
   const hasPackageJson = await checkForFile('package.json', cwd);
 
   if (!hasPackageJson) {
@@ -32,6 +32,10 @@ export async function npmInstall(cwd: string, clean: boolean = false) {
   if (useLerna) {
     await runLernaBootstrap(useYarn, cwd);
   }
+}
+
+export async function projectUsesYarn(cwd: string): Promise<boolean> {
+  return await checkForFile('yarn.lock', cwd);
 }
 
 async function runNpmInstall(useYarn: boolean, cwd: string) {
