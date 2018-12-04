@@ -37,11 +37,8 @@ install: npm ci
 
 script:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run lint; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then chmod +x ./cc-test-reporter; fi
-  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then ./cc-test-reporter before-build; fi
-  - npm run build
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run docs; fi
+  - npm run build
 
 jobs:
   include:
@@ -50,6 +47,8 @@ jobs:
         - mkdir -p ./tmp/
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+        - npm run build
         - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.git.json packages/git/coverage/lcov.info
         - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.util.json packages/util/coverage/lcov.info
         - ./cc-test-reporter format-coverage -t lcov -o tmp/codeclimate.web.json packages/web/coverage/lcov.info
