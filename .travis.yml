@@ -38,6 +38,7 @@ install: npm ci
 script:
   - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run lint; fi
   - npm run build
+  - if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then npm run docs; fi
 
 jobs:
   include:
@@ -54,12 +55,6 @@ jobs:
         - ./cc-test-reporter sum-coverage tmp/codeclimate.*.json -p 3 -o tmp/codeclimate.total.json
         - ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json
         - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage -i tmp/codeclimate.total.json; fi
-      node_js: 11
-      os: linux
-
-    - stage: Build Documentation
-      script:
-        - npm run docs
       node_js: 11
       os: linux
 
