@@ -17,12 +17,14 @@
     "merl": "node ./packages/cli/src/index.js"
   },
   "devDependencies": {
+    "@types/find-up": "^2.1.1",
     "@types/jest": "^23.3.1",
     "@types/node": "^10.9.4",
+    "@types/p-map": "^1.1.0",
     "@types/rimraf": "^2.0.2",
     "jest": "^23.5.0",
     "lerna": "^3.2.1",
-    "memfs": "^2.9.4",
+    "memfs": "~2.9.4",
     "prettier": "1.15.3",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.1.4",
