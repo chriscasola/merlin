@@ -3,9 +3,10 @@ module.exports = {
   "mode": "modules",
   "exclude": [
     "**/packages/cli/**/*",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.d.ts",
   ],
   "out": "./docs",
   "external-modulemap": ".*packages\/([^\/]+)\/.*",
-  "readme": "./README.md"
+  "readme": "./README.md",
 };
