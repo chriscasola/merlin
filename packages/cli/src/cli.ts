@@ -1,49 +1,34 @@
+import { getConfig, IPluginConfig } from '@merl/util';
 import * as program from 'commander';
-import dev from './dev';
-import installDeps from './install-deps';
-import listBranches from './list-branches';
-import monoRun from './mono-run';
+import { ICLIPlugin } from './plugin-api';
 
-program
-  .command('dev [branch]')
-  .description('Checkout a branch and install dependencies.')
-  .option('-c, --create', 'Create the branch')
-  .action((branch, { create }) => {
-    dev(!!create, branch);
-  });
+const builtInCLI: ReadonlyArray<IPluginConfig> = Object.freeze([
+  { name: './dev' },
+  { name: './install-deps' },
+  { name: './list-branches' },
+  { name: './mono-run' },
+]);
 
-program
-  .command('list-branches')
-  .description('Lists the git branches most recently committed to.')
-  .option('-n, --num-branches', 'The number of branches to list', 5)
-  .action(({ numBranches }) => {
-    listBranches(numBranches);
-  });
+export default async function() {
+  // built-in CLI commands
+  let cliPlugins = builtInCLI;
 
-program
-  .command('install-deps')
-  .description('Optionally clean and then install dependencies.')
-  .option(
-    '-c, --clean',
-    'Clean previously installed dependencies before installing.',
-  )
-  .action(({ clean }) => {
-    installDeps(!!clean);
-  });
+  // plugin-based CLI commands
+  const config = await getConfig();
+  if (config.plugins) {
+    cliPlugins = cliPlugins.concat(config.plugins);
+  }
 
-program
-  .command('mono-run [command]')
-  .description('Run a NPM script in a monorepo using lerna')
-  .option(
-    '-t, --target [package-name]',
-    'The name of a package to which the scope should be limited.',
-  )
-  .option(
-    '-p, --package-location [package-location]',
-    'The location of a package to which the scope should be limited.',
-  )
-  .action((command, { target, packageLocation }) => {
-    monoRun(command, target, packageLocation);
-  });
+  // load each command
+  const pluginPromise = Promise.all(
+    cliPlugins.map(async plugin => {
+      try {
+        await (require(plugin.name) as ICLIPlugin).install(program);
+      } catch (e) {
+        console.error(`Unable to load "${plugin.name}" plugin!\n`, e);
+      }
+    }),
+  );
 
-program.parse(process.argv);
+  pluginPromise.then(() => program.parse(process.argv));
+}

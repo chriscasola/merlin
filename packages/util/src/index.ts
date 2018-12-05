@@ -1,2 +1,2 @@
 export * from './exec';
-export { getConfig } from './config';
+export { getConfig, IPluginConfig, IConfig } from './config';
