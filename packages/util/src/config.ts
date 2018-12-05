@@ -8,6 +8,11 @@ import * as util from 'util';
 
 const readFile = util.promisify(fs.readFile);
 
+export interface IPluginConfig {
+  name: string;
+  options: { [index: string]: any };
+}
+
 export interface IConfig {
   github?: {
     domain?: string;
@@ -15,6 +20,7 @@ export interface IConfig {
   npm?: {
     ignoreEngines?: boolean;
   };
+  plugins?: IPluginConfig[];
 }
 
 let cachedConfig: IConfig;

@@ -13,6 +13,7 @@
   "bin": {
     "merl": "src/index.js"
   },
+  "main": "dist/plugin-api.js",
   "repository": "https://github.com/chriscasola/merlin.git",
   "author": {
     "name": "Chris Casola",
@@ -31,6 +32,7 @@
   },
   "dependencies": {
     "@merl/git": "file:../git",
+    "@merl/util": "file:../util",
     "@merl/web": "file:../web",
     "commander": "^2.17.1",
     "tslib": "^1.9.3"
