@@ -3,7 +3,6 @@ import { ChildProcess } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as util from 'util';
-import { projectUsesYarn } from './npm';
 
 const readFile = util.promisify(fs.readFile);
 
@@ -20,10 +19,7 @@ export async function runScriptInMonorepo(
   packageName?: string,
   packageLocation?: string,
 ): Promise<ChildProcess> {
-  let pkgManager = 'npx';
-  if (await projectUsesYarn(cwd)) {
-    pkgManager = 'yarn';
-  }
+  const lernaPath = require.resolve('lerna/cli');
 
   if (packageLocation) {
     packageName = await getPackageNameFromPath(cwd, packageLocation);
@@ -35,7 +31,7 @@ export async function runScriptInMonorepo(
   }
 
   return spawn(
-    `${pkgManager} run lerna run --stream ${cmd} ${scopeCommand}`.trim(),
+    `node ${lernaPath} run --stream ${cmd} ${scopeCommand}`.trim(),
     cwd,
   );
 }
