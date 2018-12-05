@@ -1,6 +1,6 @@
 {
   "name": "@merl/web",
-  "version": "0.5.3",
+  "version": "1.0.0",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
