@@ -10,7 +10,7 @@ const readFile = util.promisify(fs.readFile);
 
 export interface IPluginConfig {
   name: string;
-  options: { [index: string]: any };
+  options?: { [index: string]: any };
 }
 
 export interface IConfig {
