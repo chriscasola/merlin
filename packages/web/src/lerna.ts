@@ -19,7 +19,9 @@ export async function runScriptInMonorepo(
   packageName?: string,
   packageLocation?: string,
 ): Promise<ChildProcess> {
-  const lernaPath = require.resolve('lerna/cli');
+  const lernaPath = require.resolve('lerna/cli', {
+    paths: [cwd],
+  });
 
   if (packageLocation) {
     packageName = await getPackageNameFromPath(cwd, packageLocation);
