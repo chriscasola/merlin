@@ -34,7 +34,7 @@
     "@merl/git": "file:../git",
     "@merl/util": "file:../util",
     "@merl/web": "file:../web",
-    "commander": "^2.17.1",
+    "commander": "^4.0.0",
     "tslib": "^1.9.3"
   }
 }
