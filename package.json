@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/find-up": "^2.1.1",
-    "@types/jest": "^23.3.1",
+    "@types/jest": "^25.0.0",
     "@types/node": "^10.9.4",
     "@types/p-map": "^1.1.0",
     "@types/rimraf": "^2.0.2",
