@@ -29,6 +29,6 @@
   "dependencies": {
     "@merl/util": "file:../util",
     "rimraf": "^2.6.2",
-    "tslib": "^1.9.3"
+    "tslib": "^2.0.0"
   }
 }

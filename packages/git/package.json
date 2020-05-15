@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "@merl/util": "file:../util",
-    "tslib": "^1.9.3"
+    "tslib": "^2.0.0"
   }
 }
