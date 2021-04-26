@@ -22,7 +22,7 @@
     "@types/node": "^10.9.4",
     "@types/p-map": "^1.1.0",
     "@types/rimraf": "^2.0.2",
-    "jest": "^23.5.0",
+    "jest": "^24.0.0",
     "lerna": "^3.2.1",
     "memfs": "~2.9.4",
     "prettier": "1.15.3",
